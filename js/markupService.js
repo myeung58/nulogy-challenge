@@ -26,7 +26,15 @@ var MarkupService = function(basePrice, labor, material) {
 
       return parseFloat(laborMarkup.toFixed(2));
     },
-    categoryMarkup: function() {},
+    categoryMarkup: function() {
+      if (!markup[material.toUpperCase()]) { return 0; }
+
+      var base = basePrice + this.baseMarkup(),
+        categoryMarkup = base * (1 + markup[material.toUpperCase()]) - base;
+      console.log(categoryMarkup);
+
+      return parseFloat(categoryMarkup.toFixed(2));
+    },
     totalMarkup: function() {}
   };
 };

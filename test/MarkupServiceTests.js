@@ -53,4 +53,22 @@ describe('MarkupService', function() {
         expect(service3.laborMarkup()).to.equal(15.55);
     });
   });
+
+  describe('.categoryMarkup', function() {
+    it('returns 0 if category markup does not apply', function() {
+      var service = new MarkupService(1000, 1, '');
+
+      expect(service.categoryMarkup()).to.equal(0);
+    });
+
+    it('returns correct category markup', function() {
+      var service1 = new MarkupService(1000, 1, 'drugs'),
+        service2 = new MarkupService(1, 3, 'food'),
+        service3 = new MarkupService(123.45, 10, 'electronics');
+
+        expect(service1.categoryMarkup()).to.equal(78.75);
+        expect(service2.categoryMarkup()).to.equal(0.14);
+        expect(service3.categoryMarkup()).to.equal(2.59);
+    });
+  });
 });
