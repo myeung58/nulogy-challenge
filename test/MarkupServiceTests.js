@@ -15,7 +15,7 @@ describe('MarkupService', function() {
     var service = new MarkupService(1000, 1, '');
 
     expect(service).to.be.an('object');
-    expect(service).to.have.keys('baseMarkup', 'laborMarkup', 'categoryMarkup', 'totalMarkup');
+    expect(service).to.have.keys('baseMarkup', 'laborMarkup', 'categoryMarkup', 'getTotal');
   });
 
   describe('.baseMarkup', function() {
@@ -69,6 +69,18 @@ describe('MarkupService', function() {
         expect(service1.categoryMarkup()).to.equal(78.75);
         expect(service2.categoryMarkup()).to.equal(0.14);
         expect(service3.categoryMarkup()).to.equal(2.59);
+    });
+  });
+
+  describe('.getTotal', function() {
+    it('returns correct category markup', function() {
+        var service1 = new MarkupService(1299.99, 3, 'food'),
+        service2 = new MarkupService(5432.00, 1, 'drugs'),
+        service3 = new MarkupService(12456.95, 4, 'books');
+
+        expect(service1.getTotal()).to.equal(1591.58);
+        expect(service2.getTotal()).to.equal(6199.81);
+        expect(service3.getTotal()).to.equal(13707.63);
     });
   });
 });

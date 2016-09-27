@@ -31,11 +31,15 @@ var MarkupService = function(basePrice, labor, material) {
 
       var base = basePrice + this.baseMarkup(),
         categoryMarkup = base * (1 + markup[material.toUpperCase()]) - base;
-      console.log(categoryMarkup);
 
       return parseFloat(categoryMarkup.toFixed(2));
     },
-    totalMarkup: function() {}
+    getTotal: function() {
+      var base = basePrice + this.baseMarkup(),
+        total = base + this.laborMarkup() + this.categoryMarkup();
+
+      return parseFloat(total.toFixed(2));
+    }
   };
 };
 
