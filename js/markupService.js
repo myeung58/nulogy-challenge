@@ -13,10 +13,19 @@ var MarkupService = function(basePrice, labor, material) {
 
   return {
     baseMarkup: function() {
+      if (basePrice <= 0) { return 0; }
+
       var baseMarkup = basePrice * (1 + markup.BASE) - basePrice;
       return parseFloat(baseMarkup.toFixed(2));
     },
-    laborMarkup: function() {},
+    laborMarkup: function() {
+      if (labor <= 0 ) { return 0; }
+
+      var base = basePrice + this.baseMarkup(),
+        laborMarkup = base * (1 + (labor * markup.LABOR)) - base;
+
+      return parseFloat(laborMarkup.toFixed(2));
+    },
     categoryMarkup: function() {},
     totalMarkup: function() {}
   };
